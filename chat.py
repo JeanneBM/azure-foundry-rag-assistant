@@ -59,9 +59,7 @@ def main() -> int:
             if args.question is not None:
                 print_answer(session.ask(args.question), as_json=args.json)
                 return 0
-            print(
-                f"Azure Foundry RAG Assistant — Foundry agent {settings.agent_name}, version {version}"
-            )
+            print(f"Azure Foundry RAG Assistant — {settings.agent_name}, version {version}")
             print(settings.welcome_message or DEFAULT_WELCOME)
             print("Type exit to close this chat.\n")
             while True:
