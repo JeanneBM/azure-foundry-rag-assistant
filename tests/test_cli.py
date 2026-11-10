@@ -122,5 +122,5 @@ def test_interactive_rejection_is_not_presented_as_unknown(settings, monkeypatch
     assert "Answer unavailable" in captured.out
     # The introduction explains the refusal policy, but an error must not be
     # presented as an actual unknown-answer response.
-    assert "Agent: I don't know" not in captured.out
+    assert "Assistant: I don't know" not in captured.out
     assert "multiple_retrieval_calls" in captured.err

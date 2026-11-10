@@ -1,15 +1,17 @@
-# Azure Foundry RAG Agent
+# Azure Foundry RAG Assistant
 
 [![Tests](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/ci.yml/badge.svg?branch=main&v=2)](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/ci.yml)
 [![Security — CodeQL](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/security.yml/badge.svg?branch=main&v=2)](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/security.yml)
 
-A Python application for answering questions from an Azure AI Search knowledge base
-through a versioned Microsoft Foundry agent and MCP. It includes a guarded terminal
-client, a disposable Azure demo lab and automated offline tests.
+A Python RAG assistant for document Q&A. It answers questions from an Azure AI Search
+knowledge base, cites retrieved sources and abstains when the documents do not support
+an answer. The repository includes a terminal client, a disposable Azure demo lab
+and automated offline tests.
 
-The included **RagDemo** assistant covers **product returns and support hours**.
-Answers are configured to be in English, cite retrieved sources and refuse questions
-outside the connected documents. This is a document Q&A demo, not a general assistant.
+**Stack:** Python · Microsoft Foundry SDK · versioned Microsoft Foundry prompt agent · Azure AI Search knowledge base · MCP retrieval
+
+The **RagDemo** demo covers **product returns and support hours** and is configured
+to answer in English.
 
 [Use your own knowledge base](docs/quickstart.md) · [Lab reports](docs/lab-validation.md)
 · [Troubleshooting](docs/troubleshooting.md) · [GitHub Actions](docs/github-actions.md)

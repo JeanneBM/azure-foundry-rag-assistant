@@ -1,6 +1,6 @@
 # Connect an existing knowledge base
 
-A versioned Microsoft Foundry prompt agent connected to an existing Azure AI Search Knowledge Base through MCP, with a guarded terminal client. The application deploys the **agent definition**. An optional [dedicated demo lab](../README.md#run-the-dedicated-demo-lab) provisions isolated Azure resources and synthetic documents; no HTTP API is served.
+The RAG assistant uses a Python terminal client and a versioned Microsoft Foundry prompt agent. The Foundry agent connects to your Azure AI Search knowledge base through MCP. The deployment script creates or reuses the **Foundry agent definition**. An optional [dedicated demo lab](../README.md#run-the-dedicated-demo-lab) provisions isolated Azure resources and synthetic documents; no HTTP API is served.
 
 [Complete documentation](../README.md) · [Offline CI setup](github-actions.md)
 

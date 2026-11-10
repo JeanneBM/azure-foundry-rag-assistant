@@ -1,4 +1,4 @@
-"""Interactive or one-shot chat with a pinned Foundry RAG agent version."""
+"""Ask the Azure Foundry RAG Assistant interactively or with a single question."""
 
 import argparse
 import json
@@ -34,7 +34,7 @@ def print_answer(answer, *, as_json: bool = False) -> None:
             )
         )
         return
-    print(f"\nAgent: {answer.text}\n")
+    print(f"\nAssistant: {answer.text}\n")
     if answer.sources:
         print("Sources:")
         for source in answer.sources:
@@ -59,7 +59,9 @@ def main() -> int:
             if args.question is not None:
                 print_answer(session.ask(args.question), as_json=args.json)
                 return 0
-            print(f"Document Q&A Assistant — {settings.agent_name}, version {version}")
+            print(
+                f"Azure Foundry RAG Assistant — Foundry agent {settings.agent_name}, version {version}"
+            )
             print(settings.welcome_message or DEFAULT_WELCOME)
             print("Type exit to close this chat.\n")
             while True:
