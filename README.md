@@ -1,7 +1,7 @@
 # Azure Foundry RAG Assistant
 
-[![Tests](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/ci.yml/badge.svg?branch=main&v=2)](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/ci.yml)
-[![Security — CodeQL](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/security.yml/badge.svg?branch=main&v=2)](https://github.com/JeanneBM/azure-foundry-rag-agent/actions/workflows/security.yml)
+[![Tests](https://github.com/JeanneBM/azure-foundry-rag-assistant/actions/workflows/ci.yml/badge.svg?branch=main&v=2)](https://github.com/JeanneBM/azure-foundry-rag-assistant/actions/workflows/ci.yml)
+[![Security — CodeQL](https://github.com/JeanneBM/azure-foundry-rag-assistant/actions/workflows/security.yml/badge.svg?branch=main&v=2)](https://github.com/JeanneBM/azure-foundry-rag-assistant/actions/workflows/security.yml)
 
 A Python RAG assistant for document Q&A. It answers questions from an Azure AI Search
 knowledge base, cites retrieved sources and abstains when the documents do not support
@@ -66,8 +66,8 @@ Prerequisites: Python **3.12**, Azure CLI with Foundry project creation and Sear
 resource-scoped roles. The live session used Azure CLI 2.91.0.
 
 ```bash
-git clone https://github.com/JeanneBM/azure-foundry-rag-agent.git
-cd azure-foundry-rag-agent
+git clone https://github.com/JeanneBM/azure-foundry-rag-assistant.git
+cd azure-foundry-rag-assistant
 python -m venv .venv
 ```
 
@@ -132,7 +132,8 @@ are not adopted or deleted.
 
 `create_rag_agent.py` creates or reuses a version and writes an atomic local manifest.
 Reuse compares the requested definition's fingerprint with the latest version's
-`managed_by` and `config_sha256` metadata; server-added defaults do not create duplicates.
+`managed_by` and `config_sha256` metadata. Both the current and former project markers
+are accepted for reuse when the fingerprint matches.
 A changed definition or `--force` creates a candidate version.
 
 Clients resolve `--version` → `AGENT_VERSION` → a matching local manifest, never

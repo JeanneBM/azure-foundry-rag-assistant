@@ -11,6 +11,8 @@ from rag_foundry.config import Settings
 SERVER_LABEL = "KnowledgeBase"
 RETRIEVE_TOOL = "knowledge_base_retrieve"
 UNKNOWN_ANSWER = "I don't know"
+MANAGED_BY = "azure-foundry-rag-assistant"
+LEGACY_MANAGED_BY = "azure-foundry-rag-agent"
 
 INSTRUCTIONS = """Always answer in English using only the connected knowledge base.
 Use English regardless of the question language or earlier conversation language.
@@ -71,13 +73,13 @@ def deploy(project, settings: Settings, *, force: bool = False):
     if (
         not force
         and latest is not None
-        and (latest.metadata or {}).get("managed_by") == "azure-foundry-rag-agent"
+        and (latest.metadata or {}).get("managed_by") in (MANAGED_BY, LEGACY_MANAGED_BY)
         and (latest.metadata or {}).get("config_sha256") == digest
     ):
         return latest, False, digest
     agent = project.agents.create_version(
         agent_name=settings.agent_name,
         definition=desired,
-        metadata={"config_sha256": digest, "managed_by": "azure-foundry-rag-agent"},
+        metadata={"config_sha256": digest, "managed_by": MANAGED_BY},
     )
     return agent, True, digest

@@ -16,15 +16,17 @@ def agent(settings, version="2"):
         version=version,
         definition=definition(settings),
         metadata={
-            "managed_by": "azure-foundry-rag-agent",
+            "managed_by": "azure-foundry-rag-assistant",
             "config_sha256": fingerprint(definition(settings)),
         },
     )
 
 
-def test_unchanged_definition_does_not_create_version(settings):
+@pytest.mark.parametrize("managed_by", ["azure-foundry-rag-assistant", "azure-foundry-rag-agent"])
+def test_unchanged_definition_does_not_create_version(settings, managed_by):
     project = Mock()
     current = agent(settings)
+    current.metadata["managed_by"] = managed_by
     project.agents.get.return_value.versions.latest = current
     selected, created, digest = deploy(project, settings)
     assert selected is current

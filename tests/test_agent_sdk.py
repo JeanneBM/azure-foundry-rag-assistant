@@ -78,7 +78,7 @@ class AgentTransport(HttpTransport):
                                 "metadata": self.metadata
                                 if self.metadata is not None
                                 else {
-                                    "managed_by": "azure-foundry-rag-agent",
+                                    "managed_by": "azure-foundry-rag-assistant",
                                     "config_sha256": fingerprint(definition(self.settings)),
                                 },
                                 "definition": {
@@ -117,6 +117,7 @@ def test_azure_sdk_deploy_contract(settings):
     assert created and agent.version == "1"
     assert agent.definition.as_dict() == definition(settings).as_dict()
     assert agent.metadata["config_sha256"] == digest
+    assert agent.metadata["managed_by"] == "azure-foundry-rag-assistant"
     request = transport.requests[-1]
     assert request.method == "POST"
     body = json.loads(request.body)
@@ -156,7 +157,7 @@ def test_azure_sdk_reuses_deserialized_latest_version(settings):
     "metadata,force",
     [
         ({}, False),
-        ({"managed_by": "azure-foundry-rag-agent", "config_sha256": "old"}, False),
+        ({"managed_by": "azure-foundry-rag-assistant", "config_sha256": "old"}, False),
         (None, True),
     ],
 )
