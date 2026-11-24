@@ -16,6 +16,35 @@ to answer in English.
 [Use your own knowledge base](docs/quickstart.md) · [Lab reports](docs/lab-validation.md)
 · [Troubleshooting](docs/troubleshooting.md) · [GitHub Actions](docs/github-actions.md)
 
+## Architecture
+
+The terminal client runs locally; the pinned prompt agent and Search knowledge base run in Azure. The demo uses text search and semantic ranking, with no embedding deployment or vector index. Client checks establish citation provenance.
+
+```mermaid
+flowchart TD
+  USER(("User")) --> CLIENT["Local Python terminal client"]
+  DOCS["Synthetic demo documents"] --> SETUP["Lab setup and document indexing"]
+  subgraph AZ["Azure demo resource group"]
+    subgraph FOUNDRY["Microsoft Foundry project"]
+      AGENT["Versioned prompt agent"]
+      MODEL["Chat model deployment"]
+      AGENT --> MODEL
+    end
+    subgraph SEARCH["Azure AI Search"]
+      KB["Knowledge base and knowledge source"]
+      IDX[("Document index: text and semantic ranking")]
+      KB --> IDX
+    end
+    AGENT -->|"required MCP retrieval"| KB
+    KB -->|"excerpts and source IDs"| AGENT
+    SETUP --> IDX
+  end
+  CLIENT -->|"pinned agent version"| AGENT
+  AGENT --> CHECK["Client: retrieval and citation validation"]
+  CHECK --> OUT["Accepted answer or abstention"]
+  CHECK -->|"accepted turns only"| HIST[("Bounded local chat history")]
+```
+
 ## Demo knowledge base
 
 The lab indexes two synthetic documents from [examples/lab-documents.json](examples/lab-documents.json).
